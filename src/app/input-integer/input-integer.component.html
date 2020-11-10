@@ -1,0 +1,17 @@
+<div class="cant">
+    <!-- Banana in the box - Estamos conectados ida y vuelta html->ts ts->html en el ngModel-->
+    <!-- keyup = al tocar una tecla. $event captura la info de todo el evento y la interaccion del usuario -->
+    <input type="number" class="form-control input-width text-center" [(ngModel)]="quantity" (keyup)="changeQuantity($event)">
+
+    <div class="addQuitItems mt-1">
+        <div class="input-group-append">
+            <!-- Llamo a la funcion upQuantity al clickear. Los eventos van entre parentesis.
+         <!-- El ball que pasa como parametro es el del ngFor -->
+            <button class="btn btn-outline-secondary btn-sm" type="button" (click)="downQuantity()">-</button>
+        </div>
+
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary btn-sm" (click)="upQuantity()">+</button>
+        </div>
+    </div>
+</div>

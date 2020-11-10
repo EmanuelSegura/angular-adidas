@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-borderless table-shopping-cart text-center">
+            <thead class="text-muted">
+                <tr class="small text-uppercase">
+                    <th width="120"></th>
+                    <th width="120">Nombre</th>
+                    <th width="120">Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let ball of cartlist$ | async">
+                    <td>
+                        <figure class="itemside align-items-center">
+                            <div class="aside"><img [src]="ball.image" width="50" class="img-sm"></div>
+                        </figure>
+                    </td>
+
+
+                    <td>
+                        <div class="price-wrap">
+                            <var class="price">{{ball.name}}</var>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="price-wrap">
+                            <var class="price">{{ball.quantity}}</var>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

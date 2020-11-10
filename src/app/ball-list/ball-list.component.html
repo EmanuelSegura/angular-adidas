@@ -1,0 +1,38 @@
+<h1 class="mt-5">Pelotas</h1>
+<table class="table text-center mt-5 mb-5">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Competición</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Las directivas van siempre adentro del elemento. Las directivas de atributo van entre [] -->
+        <tr *ngFor="let ball of balls" [ngClass]="{'clearance': ball.clearance}">
+            <td class='align-middle'><img width="100" [src]="ball.image" [alt]="ball.name"></td>
+            <td class='align-middle'>{{ball.name}}</td>
+            <td class='align-middle'>{{ball.competition}}</td>
+            <td class='align-middle'>{{ball.price | currency : 'USD' : 'symbol' : '1.0-0' }}</td>
+            <!-- El Span es para que, en caso que haya stock, no quede sin info la columna. -->
+            <td class='align-middle'><span class="badge badge-warning" *ngIf="ball.stock==0;else availableStock">SIN STOCK</span></td>
+            <!-- Si el stock no es 0, el else del ngIf conecta al ng-template y muestra la info de allí. En este caso el stock  -->
+            <ng-template #availableStock> <span class="badge badge-success">DISPONIBLE</span></ng-template>
+
+            <td class='align-middle'>
+                <!-- Usamos los corchetes para decirle que es un dato que le estamos mandando del padre al componente del [hijo] -->
+                <!-- El [quantity] hace referencia al @input de el input-integer.ts -->
+                <!-- El corchete de un lado es para pasarle algo. Del lado derecho, es el @input. (Lo recibo como un parametro de entrada) -->
+                <app-input-integer [(quantity)]="ball.quantity" [max]="ball.stock" (maxReached)="maxReached($event)" *ngIf="ball.stock>0"></app-input-integer>
+            </td>
+            <td class='align-middle'>
+                <button class="btn btn-outline-dark btn-agregar" (click)="addToCart(ball)" *ngIf="ball.stock>0">Agregar</button>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
